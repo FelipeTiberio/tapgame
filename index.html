@@ -9,77 +9,77 @@
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <script src="js/howler.js" text="text/javascript"></script>
    <!-- Define inlined PaperScript associate it with myCanvas -->
-  <script type="text/paperscript" canvas="myCanvas">
-    
+  <script type="text/paperscript" canvas="myCanvas" href='js/game.js'>
     // array de circulos para as páginas 
-    var circles = []; 
-    // todos os 26 arquivos de mp3 que estão na pasta /sounds
+  var circles = []; 
+  // todos os 26 arquivos de mp3 que estão na pasta /sounds
 
-    var list_mp3s = ['sounds/dotted-spiral.mp3', 'sounds/confetti.mp3', 'sounds/corona.mp3', 'sounds/strike.mp3', 
-    'sounds/pinwheel.mp3', 'sounds/piston-1.mp3', 'sounds/suspension.mp3', 'sounds/prism-1.mp3', 'sounds/veil.mp3',
-    'sounds/piston-2.mp3', 'sounds/ufo.mp3', 'sounds/prism-3.mp3', 'sounds/timer.mp3', 'sounds/wipe.mp3', 'sounds/glimmer.mp3',
-    'sounds/bubbles.mp3', 'sounds/splits.mp3', 'sounds/flash-3.mp3', 'sounds/prism-2.mp3', 'sounds/squiggle.mp3', 'sounds/flash-2.mp3', 
-    'sounds/moon.mp3', 'sounds/flash-1.mp3', 'sounds/zig-zag.mp3', 'sounds/clay.mp3', 'sounds/piston-3.mp3'];
+  var list_mp3s = ['sounds/dotted-spiral.mp3', 'sounds/confetti.mp3', 'sounds/corona.mp3', 'sounds/strike.mp3', 
+  'sounds/pinwheel.mp3', 'sounds/piston-1.mp3', 'sounds/suspension.mp3', 'sounds/prism-1.mp3', 'sounds/veil.mp3',
+  'sounds/piston-2.mp3', 'sounds/ufo.mp3', 'sounds/prism-3.mp3', 'sounds/timer.mp3', 'sounds/wipe.mp3', 'sounds/glimmer.mp3',
+  'sounds/bubbles.mp3', 'sounds/splits.mp3', 'sounds/flash-3.mp3', 'sounds/prism-2.mp3', 'sounds/squiggle.mp3', 'sounds/flash-2.mp3', 
+  'sounds/moon.mp3', 'sounds/flash-1.mp3', 'sounds/zig-zag.mp3', 'sounds/clay.mp3', 'sounds/piston-3.mp3'];
 
-    var sound = []; 
-    list_mp3s.map( function(mp3){
-       sound.push( new Howl({src: [mp3]}) );
-    });
+  var sound = []; 
+  list_mp3s.map( function(mp3){
+     sound.push( new Howl({src: [mp3]}) );
+  });
 
-    function onKeyDown(event) {
-      /**
-      * Cria um circulo aleatorio sempre que um tecla é precionada 
-      * em alguma posição da tela com uma cor aleatoria.
-      * e o adiciona em circles
-      */
+  function onKeyDown(event) {
+    /**
+    * Cria um circulo aleatorio sempre que um tecla é precionada 
+    * em alguma posição da tela com uma cor aleatoria.
+    * e o adiciona em circles
+    */
 
-      var raio = 300
-      var x = Math.floor(Math.random() * view.size.width  );
-      var y = Math.floor(Math.random() * view.size.height );
-      var i = circles.length;
-     
-      circles.push(new Path.Circle(new Point(x, y), raio))
-      circles[i].fillColor =  gera_cor();
-    }
-
-    function onFrame(event){
-      /**
-      * Anima os circulos de circles para diminuir de tamanho
-      * e altera sua cor addicionano hue + 1 
-      */
-      for(var j = 0 ; j < circles.length ; j++){
-        circles[j].fillColor.hue += 1;
-        circles[j].scale(.90);
-      }      
-    }
-
-    function gera_cor(){
-      /** Gera um cor em hex decimal aleatoria.*/
-      var hexadecimais = '0123456789ABCDEF';
-      var cor = '#';
-      for (var i = 0; i < 6; i++ ) {
-          cor += hexadecimais[Math.floor(Math.random() * 16)];
-      }
-      return cor;
+    var raio = 300
+    var x = Math.floor(Math.random() * view.size.width  );
+    var y = Math.floor(Math.random() * view.size.height );
+    var i = circles.length;
+   
+    circles.push(new Path.Circle(new Point(x, y), raio))
+    circles[i].fillColor =  gera_cor();
   }
-  
-   /**
-   ###############################################################
-    parte onde está o código para o sons, usei a lib howler.js
-   ###############################################################
-   */
 
-  var keys={KeyA:0,KeyB:1,KeyC:2,KeyD:3,KeyE:4,KeyF:5,KeyG:6,KeyH:7,KeyI:8,KeyJ:9,KeyK:10,
-    KeyL:11,KeyM:12,KeyN:13,KeyO:14,KeyP:15,KeyQ:16,KeyR:17,KeyS:18,KeyT:19,KeyU:20,KeyV:21,KeyW:22,KeyX:23,KeyY:24,KeyZ:25
-  };
+  function onFrame(event){
+    /**
+    * Anima os circulos de circles para diminuir de tamanho
+    * e altera sua cor addicionano hue + 1 
+    */
+    for(var j = 0 ; j < circles.length ; j++){
+      circles[j].fillColor.hue += 1;
+      circles[j].scale(.90);
+    }      
+  }
 
-  document.addEventListener('keypress', playanysound);
-
-  function playanysound(event){
-    if( keys.hasOwnProperty(event.code)){
-      sound[ keys[event.code]].play()
+  function gera_cor(){
+    /** Gera um cor em hex decimal aleatoria.*/
+    var hexadecimais = '0123456789ABCDEF';
+    var cor = '#';
+    for (var i = 0; i < 6; i++ ) {
+        cor += hexadecimais[Math.floor(Math.random() * 16)];
     }
-   }   
+    return cor;
+}
+
+ /**
+ ###############################################################
+  parte onde está o código para o sons, usei a lib howler.js
+ ###############################################################
+ */
+
+var keys={KeyA:0,KeyB:1,KeyC:2,KeyD:3,KeyE:4,KeyF:5,KeyG:6,KeyH:7,KeyI:8,KeyJ:9,KeyK:10,
+  KeyL:11,KeyM:12,KeyN:13,KeyO:14,KeyP:15,KeyQ:16,KeyR:17,KeyS:18,KeyT:19,KeyU:20,KeyV:21,KeyW:22,KeyX:23,KeyY:24,KeyZ:25
+};
+
+document.addEventListener('keypress', playanysound);
+
+function playanysound(event){
+  if( keys.hasOwnProperty(event.code)){
+    sound[ keys[event.code]].play()
+  }
+ }   
+    
   </script>
   </head>
   <body>
