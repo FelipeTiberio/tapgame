@@ -14,6 +14,8 @@
   var circles = []; 
   // todos os 26 arquivos de mp3 que estão na pasta /sounds
 
+  canvas = document.querySelector('#myCanvas');
+
   var list_mp3s = ['sounds/dotted-spiral.mp3', 'sounds/confetti.mp3', 'sounds/corona.mp3', 'sounds/strike.mp3', 
   'sounds/pinwheel.mp3', 'sounds/piston-1.mp3', 'sounds/suspension.mp3', 'sounds/prism-1.mp3', 'sounds/veil.mp3',
   'sounds/piston-2.mp3', 'sounds/ufo.mp3', 'sounds/prism-3.mp3', 'sounds/timer.mp3', 'sounds/wipe.mp3', 'sounds/glimmer.mp3',
@@ -62,6 +64,10 @@
     return cor;
 }
 
+  function click_mouse(e){
+    alert("vc clicou em ",e.button );
+  }
+
  /**
  ###############################################################
   parte onde está o código para o sons, usei a lib howler.js
@@ -73,6 +79,7 @@ var keys={KeyA:0,KeyB:1,KeyC:2,KeyD:3,KeyE:4,KeyF:5,KeyG:6,KeyH:7,KeyI:8,KeyJ:9,
 };
 
 document.addEventListener('keypress', playanysound);
+canvas.addEventListener('onmousedown', click_mouse)
 
 function playanysound(event){
   if( keys.hasOwnProperty(event.code)){
